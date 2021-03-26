@@ -4,7 +4,8 @@ import { ConfigService } from '@nestjs/config';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  const configService = app.get(ConfigService);
-  await app.listen(configService.get('port'));
+  const port = app.get(ConfigService).get('port');
+  await app.listen(port);
+  console.log(`Application is up and  running on: ${await app.getUrl()}`);
 }
 bootstrap();
